@@ -24,6 +24,7 @@ At the same time, to ensure the maximum productivity of saving and retrieving ta
 
 
 
+
 # Blockchain (Install. Setup. Start)
 
 `go version go1.9.2+`
@@ -43,6 +44,7 @@ At the same time, to ensure the maximum productivity of saving and retrieving ta
 
 Postman collection can be found in root folder the of the project.
 
+
 # How It Works
 ### Blockchain Basic: blocks, transactions
 
@@ -59,6 +61,9 @@ In WizeBlock, your identity is a pair of private and public keys stored on your 
 If you want to send coins to someone, you need to know their address. But addresses (despite being unique) are not something that identifies you as the owner of a “wallet”. In fact, such addresses are a human-readable representation of public keys. The address generation algorithm utilizes a combination of open algorithms that take a public key and returns real Base58-based address.
 
 Currently, WizeBlock has generating wallets on the WizeBlock node side, but in the next version wallets will generate on the user side in the Desktop application.
+
+
+
 
 # Network
 ### Network nodes and their roles
@@ -135,6 +140,8 @@ WizeBit Blockchain network developed to supported sets of commands based on the 
 Adding transactions will be performed on each node on mutually equal terms. The process of mining will consist in merging new blocks from all nodes into a single block and this block will be distributed to all existing nodes.
 
 
+
+
 # Encryption
 ### Hashing algorithms
 
@@ -146,6 +153,10 @@ More about hashing: https://en.bitcoin.it/wiki/Block_hashing_algorithm
 ### ECDSA
 WizeBlock uses elliptic curves to generate private keys. Elliptic curves is a complex mathematical concept, which we’re not going to explain in details here. What we need to know is that these curves can be used to generate really big and random numbers. The curve used by WizeBlock can randomly pick a number between 0 and 2²⁵⁶ (which is approximately 10⁷⁷, when there are between 10⁷⁸ and 10⁸² atoms in the visible universe). Such a huge upper limit means that it’s almost impossible to generate the same private key twice.
 Also, WizeBlock uses ECDSA (Elliptic Curve Digital Signature Algorithm) algorithm to sign transactions.
+
+
+
+
 
 
 # Data Storage
@@ -175,6 +186,9 @@ Also you can run from root directory `$GOPATH/src/bitbucket.org/udt/wizefs` this
 `go build -o ./cmd/wizefs_mount/wizefs_mount -v ./cmd/wizefs_mount`
 
 Then you should build 2 commands independently by going to the appropriate folder in advance: `grpc/server` and `grpc/client`.
+
+
+
 
 
 # REST Service
@@ -521,7 +535,11 @@ curl -X DELETE localhost:13000/buckets/ORIGIN/files/FILE
 
 
 
-# Desktop App
+
+
+
+
+# Desktop App (Ghost Data Protocol)
 
 ## Install
 
@@ -655,6 +673,10 @@ Then, use git to merge some latest commits:
 ```sh
 git pull upstream master
 ```
+
+
+
+
 
 
 # RAFT
