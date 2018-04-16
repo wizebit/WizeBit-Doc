@@ -24,7 +24,6 @@ At the same time, to ensure the maximum productivity of saving and retrieving ta
 
 
 
-
 # Blockchain (Install. Setup. Start)
 
 `go version go1.9.2+`
@@ -44,7 +43,6 @@ At the same time, to ensure the maximum productivity of saving and retrieving ta
 
 Postman collection can be found in root folder the of the project.
 
-
 # How It Works
 ### Blockchain Basic: blocks, transactions
 
@@ -53,16 +51,6 @@ Blockchain is just a database with certain structure: it’s an ordered, back-li
 In blockchain it’s blocks that store valuable information, in particular, transactions, the essence of any cryptocurrency. Besides this, a block contains some technical information, like its version, current timestamp and the hash of the previous block.
 
 A transaction is a combination of inputs and outputs. Inputs of a new transaction reference outputs of a previous transaction. Outputs are where coins are actually stored.
-
-# Wize Wallet
-
-In WizeBlock, your identity is a pair of private and public keys stored on your computer (or stored in some other place you have access to). A wallet is nothing but a key pair. In the construction of wallet a new key pair is generated with ECDSA which is based on elliptic curves. A private key is generated using the curve, and a public key is generated from the private key. One thing to notice: in elliptic curve based algorithms, public keys are points on a curve. This is a public key is a combination of X, Y coordinates.
-
-If you want to send coins to someone, you need to know their address. But addresses (despite being unique) are not something that identifies you as the owner of a “wallet”. In fact, such addresses are a human-readable representation of public keys. The address generation algorithm utilizes a combination of open algorithms that take a public key and returns real Base58-based address.
-
-Currently, WizeBlock has generating wallets on the WizeBlock node side, but in the next version wallets will generate on the user side in the Desktop application.
-
-
 
 
 # Network
@@ -83,17 +71,19 @@ This node will be used to send coins between wallets. It’ll store a full copy 
 
 
 
-# Encryption Messages
+# Wize Protocol
 ### Nodes communicate by the means of messages.
 
 When a new node is run, it gets several nodes from a DNS seed, and sends them version message. If node is not the central one, it must send version message to the central node to find out if its blockchain is outdated.
 
 Next message getblocks means “show me what blocks you have” (in Bitcoin, it’s more complex). Pay attention, it doesn’t say “give me all your blocks”, instead it requests a list of block hashes.
 
-WizeBlock uses inv to show other nodes what blocks or transactions current node has. Again, it doesn’t contain whole blocks and transactions, just their hashes.
+WizeBit uses inv to show other nodes what blocks or transactions current node has. Again, it doesn’t contain whole blocks and transactions, just their hashes.
 
 Message getdata is a request for certain block or transaction, and it can contain only one block or transaction ID. The handler is straightforward: if they request a block, return the block; if they request a transaction, return the transaction. Notice, that we don’t check if we actually have this block or transaction.
 Messages block and tx actually transfer the data.
+
+Wize Protocol also will be able to communicate to IoT devices in own encryption protocol. 
 
 # REST Service
 ### WizeBlock provides a REST service with next API:
@@ -112,6 +102,15 @@ returns wallet info
 `(nodeAddress:nodePort/send)` with POST parameters: from_address, to_address, amount value and `minenow flag`; 
 
 minenow flag is used for mining new blocks, if it is true new block will mine, and if it false the Miner nodes receive the transaction and keep it in its memory pool and when there are enough transactions in the memory pool, the miner starts mining a new block.
+
+
+# Wize Wallet
+
+In WizeBlock, your identity is a pair of private and public keys stored on your computer (or stored in some other place you have access to). A wallet is nothing but a key pair. In the construction of wallet a new key pair is generated with ECDSA which is based on elliptic curves. A private key is generated using the curve, and a public key is generated from the private key. One thing to notice: in elliptic curve based algorithms, public keys are points on a curve. This is a public key is a combination of X, Y coordinates.
+
+If you want to send coins to someone, you need to know their address. But addresses (despite being unique) are not something that identifies you as the owner of a “wallet”. In fact, such addresses are a human-readable representation of public keys. The address generation algorithm utilizes a combination of open algorithms that take a public key and returns real Base58-based address.
+
+Currently, WizeBlock has generating wallets on the WizeBlock node side, but in the next version wallets will generate on the user side in the Desktop application.
 
 # Mining
 
@@ -140,8 +139,6 @@ WizeBit Blockchain network developed to supported sets of commands based on the 
 Adding transactions will be performed on each node on mutually equal terms. The process of mining will consist in merging new blocks from all nodes into a single block and this block will be distributed to all existing nodes.
 
 
-
-
 # Encryption
 ### Hashing algorithms
 
@@ -153,10 +150,6 @@ More about hashing: https://en.bitcoin.it/wiki/Block_hashing_algorithm
 ### ECDSA
 WizeBlock uses elliptic curves to generate private keys. Elliptic curves is a complex mathematical concept, which we’re not going to explain in details here. What we need to know is that these curves can be used to generate really big and random numbers. The curve used by WizeBlock can randomly pick a number between 0 and 2²⁵⁶ (which is approximately 10⁷⁷, when there are between 10⁷⁸ and 10⁸² atoms in the visible universe). Such a huge upper limit means that it’s almost impossible to generate the same private key twice.
 Also, WizeBlock uses ECDSA (Elliptic Curve Digital Signature Algorithm) algorithm to sign transactions.
-
-
-
-
 
 
 # Data Storage
@@ -186,9 +179,6 @@ Also you can run from root directory `$GOPATH/src/bitbucket.org/udt/wizefs` this
 `go build -o ./cmd/wizefs_mount/wizefs_mount -v ./cmd/wizefs_mount`
 
 Then you should build 2 commands independently by going to the appropriate folder in advance: `grpc/server` and `grpc/client`.
-
-
-
 
 
 # REST Service
@@ -533,152 +523,6 @@ curl -X GET localhost:13000/buckets/ORIGIN/files/FILE --output /PATH/FILE
 curl -X DELETE localhost:13000/buckets/ORIGIN/files/FILE
 ```
 
-
-
-
-
-
-
-# Desktop App (Ghost Data Protocol)
-
-## Install
-
-* **Note: requires a node version >= 7 and an npm version >= 4.**
-* **Project is based on [electron-react-bolerlate](https://github.com/chentsulin/electron-react-boilerplate). So if you have installation or compilation issues with this project, please see [debugging guide](https://github.com/chentsulin/electron-react-boilerplate/issues/400).**
-
-First, clone the repo via git and then install dependencies with npm.
-
-```bash
-$ cd wize-desktop
-$ npm install
-```
-
-## Run
-
-Start the app in the `dev` environment. This starts the renderer process in [**hot-module-replacement**](https://webpack.js.org/guides/hmr-react/) mode and starts a webpack dev server that sends hot updates to the renderer process:
-
-```bash
-$ npm run dev
-```
-
-Alternatively, you can run the renderer and main processes separately. This way, you can restart one process without waiting for the other. Run these two commands **simultaneously** in different console tabs:
-
-```bash
-$ npm run start-renderer-dev
-$ npm run start-main-dev
-```
-
-## Packaging
-
-To package apps for the local platform:
-
-```bash
-$ npm run package
-```
-
-To package apps for all platforms:
-
-First, refer to [Multi Platform Build](https://www.electron.build/multi-platform-build) for dependencies.
-
-Then,
-```bash
-$ npm run package-all
-```
-
-To package apps with options:
-
-```bash
-$ npm run package -- --[option]
-```
-
-To run End-to-End Test
-
-```bash
-$ npm run build
-$ npm run test-e2e
-```
-
-:bulb: You can debug your production build with devtools by simply setting the `DEBUG_PROD` env variable:
-```bash
-DEBUG_PROD=true npm run package
-```
-
-## How to add modules to the project
-
-You will need to add other modules to this boilerplate, depending on the requirements of your project. For example, you may want to add [node-postgres](https://github.com/brianc/node-postgres) to communicate with PostgreSQL database, or 
-[material-ui](http://www.material-ui.com/) to reuse react UI components.
-
-⚠️ Please read the following section before installing any dependencies ⚠️
-
-### Module Structure
-
-This boilerplate uses a [two package.json structure](https://github.com/electron-userland/electron-builder/wiki/Two-package.json-Structure). This means you will have two `package.json` files.
-
-1. `./package.json` in the root of your project
-1. `./app/package.json` inside `app` folder
-
-### Which `package.json` file to use
-
-**Rule of thumb** is: all modules go into `./package.json` except native modules. Native modules go into `./app/package.json`.
-
-1. If the module is native to a platform (like node-postgres) or otherwise should be included with the published package (i.e. bcrypt, openbci), it should be listed under `dependencies` in `./app/package.json`.
-2. If a module is `import`ed by another module, include it in `dependencies` in `./package.json`.   See [this ESLint rule](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md). Examples of such modules are `material-ui`, `redux-form`, and `moment`.
-3. Otherwise, modules used for building, testing and debugging should be included in `devDependencies` in `./package.json`.
-
-### Further Readings
-
-See the wiki page, [Module Structure — Two package.json Structure](https://github.com/chentsulin/electron-react-boilerplate/wiki/Module-Structure----Two-package.json-Structure) to understand what is a native module, the rationale behind two package.json structure and more.
-
-For an example app that uses this boilerplate and packages native dependencies, see [erb-sqlite-example](https://github.com/amilajack/erb-sqlite-example).
-
-## CSS Modules
-
-This boilerplate is configured to use [css-modules](https://github.com/css-modules/css-modules) out of the box.
-
-All `.css` file extensions will use css-modules unless it has `.global.css`.
-
-If you need global styles, stylesheets with `.global.css` will not go through the
-css-modules loader. e.g. `app.global.css`
-
-If you want to import global css libraries (like `bootstrap`), you can just write the following code in `.global.css`:
-
-```css
-@import "~bootstrap/dist/css/bootstrap.css";
-```
-
-## Sass support
-
-If you want to use Sass in your app, you only need to import `.sass` files instead of `.css` once:
-```js
-import './app.global.scss';
-```
-
-## Static Type Checking
-This project comes with Flow support out of the box! You can annotate your code with types, [get Flow errors as ESLint errors](https://github.com/amilajack/eslint-plugin-flowtype-errors), and get [type errors during runtime](https://github.com/codemix/flow-runtime) during development. Types are completely optional.
-
-## Dispatching redux actions from the main process
-
-See [#118](https://github.com/chentsulin/electron-react-boilerplate/issues/118) and [#108](https://github.com/chentsulin/electron-react-boilerplate/issues/108)
-
-## How to keep your project updated with the boilerplate
-
-If your application is a fork from this repo, you can add this repo to another git remote:
-
-```sh
-git remote add upstream https://github.com/chentsulin/electron-react-boilerplate.git
-```
-
-Then, use git to merge some latest commits:
-
-```sh
-git pull upstream master
-```
-
-
-
-
-
-
 # RAFT
 
 hraftd is a reference example use of the Hashicorp Raft implementation v1.0. Raft is a distributed consensus protocol, meaning its purpose is to ensure that a set of nodes -- a cluster -- agree on the state of some arbitrary state machine, even when nodes are vulnerable to failure and network partitions. A distributed consensus is a fundamental concept when it comes to building fault-tolerant systems.
@@ -787,11 +631,11 @@ The developed software and network complex WizeBit has in its architectural basi
 
 * the standard for storing files when accessing to which the available content analog of the WEB page will be formed;
 * web browser on the basis of an existing desktop application for viewing the above-described web pages;
-* routing protocol between the WIB application pages;
-* nodes for storing addresses of WIB sites located inside the WizeBit network;
+* routing protocol between the WEB application pages;
+* nodes for storing addresses of WEB sites located inside the WizeBit network;
 
 
-# Audio / Video / Chat communication systems inside WizeBit
+# WizeBit Protocol
 
 One of the most vital problems of today's messengers is their potential cooperation with regulatory bodies that entails the danger of disclosure of personal data in communication via audio, video, chat.
 
