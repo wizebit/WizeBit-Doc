@@ -43,20 +43,8 @@ At the same time, to ensure the maximum productivity of saving and retrieving ta
 
 Postman collection can be found in root folder the of the project.
 
-# How It Works
-### Blockchain Basic: blocks, transactions
-
-Blockchain is just a database with certain structure: it’s an ordered, back-linked list. Which means that blocks are stored in the insertion order and that each block is linked to the previous one. This structure allows to quickly get the latest block in a chain and to (efficiently) get a block by its hash.
-
-In blockchain it’s blocks that store valuable information, in particular, transactions, the essence of any cryptocurrency. Besides this, a block contains some technical information, like its version, current timestamp and the hash of the previous block.
-
-A transaction is a combination of inputs and outputs. Inputs of a new transaction reference outputs of a previous transaction. Outputs are where coins are actually stored.
-
-
 # Network
 ### Network nodes and their roles
-
-Current WizeBlock network implementation has some simplification. Bitcoin network is decentralized, which means there’re no servers that do stuff and clients that use servers to get or process data. In our implementation, there will be centralization though.
 
 ### We’ll have three node roles:
 
@@ -74,7 +62,7 @@ This node will be used to send coins between wallets. It’ll store a full copy 
 # Wize Protocol
 ### Nodes communicate by the means of messages.
 
-When a new node is run, it gets several nodes from a DNS seed, and sends them version message. If node is not the central one, it must send version message to the central node to find out if its blockchain is outdated.
+When a new node is run mode, it gets several nodes from a DNS seed, and sends them version message. If node is not the central one, it must send version message to the central node to find out if its blockchain is outdated.
 
 Next message getblocks means “show me what blocks you have” (in Bitcoin, it’s more complex). Pay attention, it doesn’t say “give me all your blocks”, instead it requests a list of block hashes.
 
