@@ -102,18 +102,6 @@ Currently, WizeBlock has generating wallets on the WizeBlock node side, but in t
 
 # Mining
 
-### Mining algorithm, proof-of-work
-
-A key idea of blockchain is that one has to perform some hard work to put data in it. It is this hard work that makes blockchain secure and consistent. Also, a reward is paid for this hard work (this is how people get coins for mining).
-
-In blockchain, some participants (miners) of the network work to sustain the network, to add new blocks to it, and get a reward for their work. As a result of their work, a block is incorporated into the blockchain in a secure way, which maintains the stability of the whole blockchain database. It’s worth noting that, the one who finished the work has to prove this.
-
-This whole “do hard work and prove” mechanism is called proof-of-work. It’s hard because it requires a lot of computational power: even high-performance computers cannot do it quickly.
-
-Proof-of-Work algorithms must meet a requirement: doing the work is hard, but verifying the proof is easy. A proof is usually handed to someone else, so for them, it shouldn’t take much time to verify it.
-WizeBlock uses Hashcash, a Proof-of-Work algorithm that was initially developed to secure network. This is a brute force algorithm: you change the counter, calculate a new hash, check it, increment the counter, calculate a hash, etc.
-
-
 ### Implementation of the Proof-of-Stake algorithm for adding blocks.
 
 The purpose is to implement the Proof-of-Stake algorithm for adding blocks to Wize BlockChain. Blocks should be added in parallel mode. Accordingly, proceeding from this algorithm will be implemented for the formation of consensus.
@@ -610,25 +598,3 @@ Namely:
 * WizeBit guarantees the owner of the file its full concealment, integrity, and also anonymity if necessary;
 
 Given the fact that the standard ERC721 is currently a global brand it gives the opportunity to believe that representing of this functionality on the part of WizeBit guarantees a sufficiently high competitiveness and commercial benefits.
-
-### Using WizeBit as an alternative WEB network
-
-Today, an ever-increasing problem of the WEB network is the restriction of information dissemination by regulators, censorship, restriction of anonymity and freedom of expression.
-
-The developed software and network complex WizeBit has in its architectural basis all the necessary capabilities to provide the end user with services that solve the above-mentioned shortcomings of the existing WEB network. To solve the described problem, developers need to develop 2 basic tools that allow emulating websites inside the WizeBit network. It is necessary to develop:
-
-* the standard for storing files when accessing to which the available content analog of the WEB page will be formed;
-* web browser on the basis of an existing desktop application for viewing the above-described web pages;
-* routing protocol between the WEB application pages;
-* nodes for storing addresses of WEB sites located inside the WizeBit network;
-
-
-# WizeBit Protocol
-
-One of the most vital problems of today's messengers is their potential cooperation with regulatory bodies that entails the danger of disclosure of personal data in communication via audio, video, chat.
-
-WizeBit network is positioned as an absolutely anonymous and confidential channel for data exchange (the guarantee is based on the use of technical and architectural solutions based on the use of data encryption algorithms SHA, AES, RSA) and gives every reason to believe that this complex can be used in the sphere of communication. The completion of the complex will take minor time consumption.
-
-To popularize the "messenger" on the basis of the WizeBit network, it is necessary to prepare a brief presenting the architecture proving that the exchange of text messages between users is absolutely safe and confidential and that the text of messages is inaccessible even for the WizeBit developers themselves.
-
-Based on the foregoing, we can summarize that the first stage of developing a messenger based on the WizeBit network is the implementation of text messaging between users. If the first stage is successfully implemented, it is possible to start the exchange of audio/video streams between the end users of the WizeBit network.
