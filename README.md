@@ -1,4 +1,4 @@
-# WizeBit Blockchain 
+# Ghost Blockchain 
 
 
 Currently, WizeBit software development is carried out in the following areas:
