@@ -1,7 +1,7 @@
-# Ghost Blockchain 
+# Ghost Drive Blockchain 
 
 
-Currently, WizeBit software development is carried out in the following areas:
+Currently, Wise software development is carried out in the following areas:
 
 ### Blockchain | Storage | Desktop App | Raft | Web
 
@@ -12,7 +12,7 @@ Implementation of the phased development of a private (closed) BlockChain networ
 * implementation of consensus;
 * support of the mining process.
 
-WizeBit Blockchain network have a software interface for desktop programs that allows to save files within the network while observing a number of security measures. The main purpose of the WizeBit Blockchain network to be developed is to ensure the maximum security, confidentiality and invulnerability of the information transferred to the storage. 
+Wise Soft network have a software interface for desktop programs that allows to save files within the network while observing a number of security measures. The main purpose of the Wise Blockchain network to be developed is to ensure the maximum security, confidentiality and invulnerability of the information transferred to the storage. 
 
 At the same time, to ensure the maximum productivity of saving and retrieving target information. Based on this the policy of choosing the algorithms used, existing prototypes, and implementation tools used is determined.
 
